@@ -1,0 +1,44 @@
+package workProject;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner inputPrice = new Scanner(System.in);
+        System.out.println("Enter array length: ");
+        int size = inputPrice.nextInt();
+        int[] initialPrice = new int [size];
+        //задаем размерность массива
+
+        System.out.println("Insert prices: ");
+        for (int i = 0; i < size; i++) {
+            initialPrice[i] = inputPrice.nextInt();
+        }
+        //задаем начальные цены без учета скидки
+
+        System.out.println("Initial price array: " + Arrays.toString(initialPrice));
+        int[] finalPrice = Arrays.copyOfRange(initialPrice, 1, 4);
+        System.out.println("Final price array: " + Arrays.toString(finalPrice));
+        //редактируем
+
+
+        discount(finalPrice);
+
+    }
+
+    public static void discount(int[] finalPrice) { // в параметры метода передаем ссылку на отредактированный массив массив
+        Scanner inputDiscount = new Scanner(System.in);
+        System.out.println("Enter discount value: ");
+        int discountValue = inputDiscount.nextInt();
+        int discountAmount;
+
+        for (int i = 0; i < finalPrice.length; i++) {
+            discountAmount = (discountValue * finalPrice[i]) / 100;
+            finalPrice[i] = finalPrice[i] - discountAmount;
+        }
+        //пишем формулу для рассчета скидки внутри цикла, тем самым, проходимся по каждому из элементов массива
+        
+        System.out.println("Discount price array" + Arrays.toString(finalPrice));
+    }
+}

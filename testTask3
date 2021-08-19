@@ -1,0 +1,43 @@
+package Serialization;
+
+import java.io.*;
+import java.util.Arrays;
+
+public class WriteObject {
+    public static void main(String[] args) {
+        int [] numbers = new int[100];
+
+        for(int i = 0; i <numbers.length; i++ ) {
+            numbers[i] = ((int)(Math.random() * 10000) + 1);
+        }
+
+        try{
+            FileOutputStream fos = new FileOutputStream("serialize.bin");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(Arrays.toString(numbers));
+
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class ReadObject {
+    public static void main(String[] args) {
+        try {
+            FileInputStream fis = new FileInputStream("serialize.bin");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            WriteObject numbers = (WriteObject)ois.readObject();
+
+            ois.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
